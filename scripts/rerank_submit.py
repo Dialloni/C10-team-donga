@@ -6,6 +6,9 @@
 
 Below the reranked window the fine-tuned-blend order is kept, so ranks 6+ are
 sane even though only the top 5 are scored.
+
+A negative result: this was never submitted. It writes submission_rerank.csv,
+never submission.csv, so running it cannot overwrite the scored file.
 """
 
 import sys
@@ -60,7 +63,7 @@ def main(argv):
     if use_topic:
         full = topic_average(full, test_q["query"].tolist())
 
-    path = ROOT / "submission.csv"
+    path = ROOT / "submission_rerank.csv"
     sub = make_submission(full, test_q.query_id.tolist(), doc_ids, path)
     assert len(sub) == 5 * len(test_q)
     print(f"Wrote {path} ({len(sub)} rows)  mode={mode}"
