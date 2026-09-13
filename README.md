@@ -14,11 +14,10 @@ competition's own relevance judgements; those fine-tunes carried the gain.
 
 The competition dataset, used as issued. All six CSVs are committed under
 [data/](data/) (496 KB), so the submission reproduces from a fresh clone with
-no Kaggle account: `documents.csv` (695 factsheets on
-crop diseases, pests, nutrient deficiencies, soil, fertiliser, climate),
-`train_queries.csv` (308 farmer-style questions), `qrels_train.csv` (graded
-relevance, 3 = perfect … 0 = irrelevant, ~14 judged per query),
-`test_queries.csv` (200 held-out questions).
+no Kaggle account: `documents.csv` (695 factsheets on crop diseases, pests,
+nutrient deficiencies, soil, fertiliser, climate), `train_queries.csv` (308
+farmer-style questions), `qrels_train.csv` (graded relevance, 3 = perfect … 0 =
+irrelevant, ~14 judged per query), `test_queries.csv` (200 held-out queries).
 
 Two properties drove the design. **Train and test topics are disjoint** — 0 of
 305 topic phrases overlap — so nothing keyed to a specific crop or disease can
@@ -26,8 +25,8 @@ generalise. And **queries arrive in template families** ("How do I cope with X
 on my farm?"), so the topic phrase carries the signal, not the wrapper.
 
 We also *created* data: [scripts/synth.py](scripts/synth.py) re-wraps document
-titles into those templates for 1,656 synthetic pairs. It made the model worse
-and is not in the submission.
+titles into those templates for 1,656 synthetic pairs. It made the model worse;
+not in the submission.
 
 ## Training Pipeline
 
@@ -69,10 +68,10 @@ local CV rises with depth and is simply wrong.
 
 Scored with **nDCG@5** ([src/pipeline.py](src/pipeline.py)).
 
-**The local CV is inflated and cannot referee tuning.** The
-fine-tuned encoders trained on all 308 train queries, so in 5-fold CV grouped
-by topic family the held-out queries were already seen by the encoder. Honest
-CV needs an out-of-fold fine-tune per fold. Two honest signals instead:
+**The local CV is inflated and cannot referee tuning.** The fine-tuned
+encoders trained on all 308 train queries, so in 5-fold CV grouped by topic
+family the held-out queries were already seen by the encoder. Honest CV needs
+an out-of-fold fine-tune per fold. Two honest signals instead:
 
 1. **A Colab topic-grouped holdout** excluding validation topics from the
    fine-tune itself: bge-base off the shelf 0.8191 → fine-tuned on random
@@ -80,7 +79,7 @@ CV needs an out-of-fold fine-tune per fold. Two honest signals instead:
 2. **The leaderboard, with ablations.** Stage 2 removed (`submit-blend`)
    scored 0.90173 against 0.92795, putting LambdaRank at roughly +0.026.
 
-Every rejected idea was tested the same way and logged with its numbers in
+Every rejected idea was tested the same way, with numbers, in
 [docs/experiments.md](docs/experiments.md).
 
 ## Reproduction
@@ -90,12 +89,12 @@ pip install -r requirements.txt
 python scripts/ltr.py submit        # writes submission.csv
 ```
 
-**No Kaggle credentials needed** — the dataset and the fine-tuned embeddings
-are committed. Verified: the output is byte-identical to the `submission.csv`
-here, the file scored 0.92795. The first run embeds the corpus (~3 min on CPU),
-cached to `/tmp/donga_emb`; later runs take seconds.
+**No Kaggle credentials needed** — the dataset and fine-tuned embeddings are
+committed. Verified: the output is byte-identical to the `submission.csv`
+here, scored 0.92795. First run embeds the corpus (~3 min, CPU), cached to
+`/tmp/donga_emb`.
 
-Regenerating the fine-tunes needs a GPU (Colab T4); the notebook table is in
+Regenerating the fine-tunes needs a GPU (Colab T4) — notebook table in
 [docs/experiments.md](docs/experiments.md).
 
     Google-Deepmind-TRI-AI-Donga/
@@ -114,12 +113,13 @@ Regenerating the fine-tunes needs a GPU (Colab T4); the notebook table is in
     │   ├── rerank_submit.py     cross-encoder rerank (negative)
     │   ├── sweep.py             encoder + ensemble comparison
     │   ├── finetune.py          local fine-tune driver
-    │   ├── run.py               older single-encoder entrypoint
+    │   ├── run.py               older entrypoint
     │   ├── download_data.py     refetch the dataset from Kaggle
     │   └── package.py           build the archive
     ├── src/
     │   └── pipeline.py          retrieval, fusion, nDCG@5
-    ├── notebooks/               GPU fine-tunes
+    ├── notebooks/               *.ipynb — upload to Colab
+    │   └── scripts/             the same cells as .py
     ├── data/                    competition CSVs
     ├── ft_embs*.npz             fine-tuned embeddings
     └── ce2_scores.npz           cross-encoder scores
@@ -131,7 +131,7 @@ modelling, retrieval pipeline, fine-tuning, experiments. Dilrabo Khidirova
 ([@iftihorbekd](https://github.com/iftihorbekd)): problem framing, data card,
 impact and stakeholder analysis.
 
-**Mentors** — *[to be filled]*
+**Mentor** — Seun Ajayi
 
 **Cohort Challenges** (AI Saturdays Lagos, C10) —
 [problem statement](docs/problem_statement.pdf) ·
