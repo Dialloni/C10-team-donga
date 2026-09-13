@@ -80,7 +80,7 @@ an out-of-fold fine-tune per fold. Two honest signals instead:
    scored 0.90173 against 0.92795, putting LambdaRank at roughly +0.026.
 
 Every rejected idea was tested the same way, with numbers, in
-[docs/experiments.md](docs/experiments.md).
+[doc/experiments.md](doc/experiments.md).
 
 ## Reproduction
 
@@ -95,13 +95,13 @@ here, scored 0.92795. First run embeds the corpus (~3 min, CPU), cached to
 `/tmp/donga_emb`.
 
 Regenerating the fine-tunes needs a GPU (Colab T4) — notebook table in
-[docs/experiments.md](docs/experiments.md).
+[doc/experiments.md](doc/experiments.md).
 
     C10-team-donga/
     ├── README.md
     ├── requirements.txt
     ├── submission.csv           the scored file
-    ├── docs/
+    ├── doc/
     │   ├── problem_statement.pdf
     │   ├── data_card.pdf
     │   ├── impact_statement_card.pdf
@@ -134,14 +134,14 @@ impact and stakeholder analysis.
 **Mentor** — Seun Ajayi
 
 **Cohort Challenges** (AI Saturdays Lagos, C10) —
-[problem statement](docs/problem_statement.pdf) ·
-[data card](docs/data_card.pdf) ·
-[impact statement](docs/impact_statement_card.pdf) ·
-[stakeholder engagement](docs/stakeholder_engagement.pdf)
+[problem statement](doc/problem_statement.pdf) ·
+[data card](doc/data_card.pdf) ·
+[impact statement](doc/impact_statement_card.pdf) ·
+[stakeholder engagement](doc/stakeholder_engagement.pdf)
 
 ## References
 
 - Competition: [Agricultural Extension RAG: Smart Retrieval for Farmers](https://www.kaggle.com/competitions/agricultural-extension-rag-smart-retrieval-for-farmers)
-- Full experiment log, every negative result with numbers: [docs/experiments.md](docs/experiments.md)
+- Full experiment log, every negative result with numbers: [doc/experiments.md](doc/experiments.md)
 - Encoders: [BAAI/bge-base-en-v1.5](https://huggingface.co/BAAI/bge-base-en-v1.5), [BAAI/bge-large-en-v1.5](https://huggingface.co/BAAI/bge-large-en-v1.5), [intfloat/e5-large-v2](https://huggingface.co/intfloat/e5-large-v2), [thenlper/gte-large](https://huggingface.co/thenlper/gte-large)
 - Reimers & Gurevych, *Sentence-BERT* (EMNLP 2019); Ke et al., *LightGBM* (NeurIPS 2017); Burges, *From RankNet to LambdaRank to LambdaMART* (2010)
