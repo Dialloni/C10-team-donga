@@ -131,7 +131,7 @@ modelling, retrieval pipeline, fine-tuning, experiments. Dilrabo Khidirova
 ([@iftihorbekd](https://github.com/iftihorbekd)): problem framing, data card,
 impact and stakeholder analysis.
 
-**Mentors** — *[to be filled]*
+**Mentor** — Seun Ajayi
 
 **Cohort Challenges** (AI Saturdays Lagos, C10) —
 [problem statement](docs/problem_statement.pdf) ·
