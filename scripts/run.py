@@ -1,7 +1,11 @@
 """Evaluate retrieval variants on the training queries, or build a submission.
 
     python scripts/run.py eval      # score every variant against train qrels
-    python scripts/run.py submit    # write submission.csv from the best variant
+    python scripts/run.py submit    # write submission_run.csv from the best variant
+
+Superseded by scripts/ltr.py, which produced the scored submission. This writes
+submission_run.csv, never submission.csv, so running it cannot overwrite the
+file the leaderboard scored.
 """
 
 import sys
@@ -62,7 +66,7 @@ def main(mode: str):
         ft = ROOT / "models" / "bge-base-ft"
         model = str(ft) if ft.exists() else "BAAI/bge-base-en-v1.5"
         scores = dense_scores(queries, corpus, model_name=model)
-        path = ROOT / "submission.csv"
+        path = ROOT / "submission_run.csv"
         sub = make_submission(scores, test_q.query_id.tolist(), doc_ids, path)
         assert len(sub) == 5 * len(test_q), f"expected 1000 rows, got {len(sub)}"
         print(f"Wrote {path} ({len(sub)} rows)")

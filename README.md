@@ -97,7 +97,7 @@ here, scored 0.92795. First run embeds the corpus (~3 min, CPU), cached to
 Regenerating the fine-tunes needs a GPU (Colab T4) — notebook table in
 [docs/experiments.md](docs/experiments.md).
 
-    Google-Deepmind-TRI-AI-Donga/
+    C10-team-donga/
     ├── README.md
     ├── requirements.txt
     ├── submission.csv           the scored file
