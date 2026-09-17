@@ -128,7 +128,7 @@ Regenerating the fine-tunes needs a GPU (Colab T4) — notebook table in
 
 **Contributors** — Abubakar Diallo ([@Dialloni](https://github.com/Dialloni)):
 modelling, retrieval pipeline, fine-tuning, experiments. Dilrabo Khidirova
-([@iftihorbekd](https://github.com/iftihorbekd)): problem framing, data card,
+([@dilrabonu](https://github.com/dilrabonu)): problem framing, data card,
 impact and stakeholder analysis.
 
 **Mentor** — Seun Ajayi
